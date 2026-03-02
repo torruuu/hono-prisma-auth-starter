@@ -13,6 +13,7 @@ const EnvSchema = z.object({
   DB_PASSWORD: z.string(),
   DB_NAME: z.string(),
   DB_PORT: z.coerce.number(),
+  FRONTEND_URL: z.string(),
 })
 
 export type env = z.infer<typeof EnvSchema>
