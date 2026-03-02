@@ -48,7 +48,7 @@ export function openApiErrorResponse(code: AppErrorCode, schema?: z.ZodType) {
 
   const baseSchema = z.object({
     error: z.object({
-      code: z.string().openapi({ example: code }),
+      code: z.string().openapi({ example: code.toUpperCase() }),
       message: z.string().openapi({ example: appError.message }),
     }),
   })
@@ -59,7 +59,7 @@ export function openApiErrorResponse(code: AppErrorCode, schema?: z.ZodType) {
 
   return z.object({
     error: z.object({
-      code: z.string().openapi({ example: 'validation_error' }),
+      code: z.string().openapi({ example: 'VALIDATION_ERROR' }),
       message: z.string().openapi({ example: 'Validation error' }),
       issues: z.array(ZodIssueSchema).openapi({
         example: generateIssuesExample(schema),
