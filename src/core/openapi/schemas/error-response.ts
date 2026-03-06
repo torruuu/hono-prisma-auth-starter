@@ -47,10 +47,8 @@ export function openApiErrorResponse(code: AppErrorCode, schema?: z.ZodType) {
   const appError = APP_ERRORS[code]
 
   const baseSchema = z.object({
-    error: z.object({
-      code: z.string().openapi({ example: code.toUpperCase() }),
-      message: z.string().openapi({ example: appError.message }),
-    }),
+    code: z.string().openapi({ example: code.toUpperCase() }),
+    message: z.string().openapi({ example: appError.message }),
   })
 
   if (!schema) {
@@ -58,12 +56,10 @@ export function openApiErrorResponse(code: AppErrorCode, schema?: z.ZodType) {
   }
 
   return z.object({
-    error: z.object({
-      code: z.string().openapi({ example: 'VALIDATION_ERROR' }),
-      message: z.string().openapi({ example: 'Validation error' }),
-      issues: z.array(ZodIssueSchema).openapi({
-        example: generateIssuesExample(schema),
-      }),
+    code: z.string().openapi({ example: code.toUpperCase() }),
+    message: z.string().openapi({ example: appError.message }),
+    issues: z.array(ZodIssueSchema).openapi({
+      example: generateIssuesExample(schema),
     }),
   })
 }

@@ -17,11 +17,9 @@ export const httpError = <T extends AppErrorCode>(
 
   return c.json(
     {
-      error: {
-        code: code.toUpperCase(),
-        message: options?.message ?? err.message,
-        ...(options?.issues && { issues: zodIssuesFormatter(options.issues) }),
-      },
+      code: code.toUpperCase(),
+      message: options?.message ?? err.message,
+      ...(options?.issues && { issues: zodIssuesFormatter(options.issues) }),
     },
     err.status as (typeof APP_ERRORS)[T]['status'],
   )

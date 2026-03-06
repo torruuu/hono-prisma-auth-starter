@@ -17,6 +17,7 @@ export const getAllProductsRoute = createRoute({
   tags,
   summary: 'Get all products',
   description: 'Retrieve a list of all available products',
+  operationId: 'getProducts',
   responses: {
     [HttpStatusCodes.OK]: jsonContent(ProductListSchema, {
       description: 'List of products',
@@ -30,6 +31,7 @@ export const getProductByIdRoute = createRoute({
   tags,
   summary: 'Get product by ID',
   description: 'Retrieve a single product by its ID',
+  operationId: 'getProductById',
   request: {
     params: ProductIdParamSchema,
   },
@@ -49,6 +51,7 @@ export const createProductRoute = createRoute({
   tags,
   summary: 'Create a product',
   description: 'Create a new product',
+  operationId: 'createProduct',
   request: {
     body: jsonContent(CreateProductSchema, {
       description: 'Product data',
