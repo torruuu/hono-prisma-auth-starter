@@ -2,8 +2,11 @@
   "editor.tabSize": 2,
   "eslint.enable": true,
   "eslint.useFlatConfig": true,
-  "eslint.validate": ["javascript", "typescript", "json"],
+  "eslint.validate": ["javascript", "typescript"],
+  "prettier.enable": true,
+  "prettier.documentSelectors": ["**/*.json"],
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "always"
+    "source.fixAll.eslint": "always",
+    "source.fixAll.prettier": "always"
   }
 }
