@@ -1,8 +1,14 @@
 import env from '@/env'
 import { prisma } from '@/integrations/database/config.js'
-import { betterAuth } from 'better-auth'
+import { betterAuth, type BetterAuthPlugin } from 'better-auth'
 import { prismaAdapter } from 'better-auth/adapters/prisma'
 import { openAPI } from 'better-auth/plugins'
+
+const plugins: BetterAuthPlugin[] = []
+
+if (env.NODE_ENV !== 'production') {
+  plugins.push(openAPI({ disableDefaultReference: true }))
+}
 
 export const auth = betterAuth({
   basePath: '/auth',
@@ -16,11 +22,7 @@ export const auth = betterAuth({
       maxAge: 60 * 5, // 5 minutes
     },
   },
-  plugins: [
-    openAPI({
-      disableDefaultReference: true,
-    }),
-  ],
+  plugins,
   database: prismaAdapter(prisma, {
     provider: 'postgresql',
   }),

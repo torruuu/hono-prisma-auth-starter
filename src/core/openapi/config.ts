@@ -1,9 +1,12 @@
 import packageJSON from '@/../package.json' with { type: 'json' }
+import env from '@/env'
 import type { OpenAPIHono } from '@hono/zod-openapi'
 import { Scalar } from '@scalar/hono-api-reference'
 import type { Env } from 'hono'
 
 export default function defineOpenAPI<E extends Env>(app: OpenAPIHono<E>) {
+  if (env.NODE_ENV === 'production') return
+
   app.doc('/docs', {
     openapi: '3.0.0',
     info: {
